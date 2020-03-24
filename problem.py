@@ -48,4 +48,14 @@ class Problem:
             print(end)
     # print()
 
+    def get_dual_problem(self):
+        """ Return dual problem """
+        mode = "min" if self.mode == "max" else "max"
+        b = self.c
+        c = np.hstack((self.b, np.zeros(self.num_var)))
+        E = np.zeros(self.num_var) - np.eye(self.num_var)
+        A = np.hstack((self.A.T, E))
+
+        return Problem(A, b, c, mode)
+    # get_dual_problem()
 # Problem
